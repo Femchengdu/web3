@@ -58,12 +58,14 @@ contract Dao {
         view
         returns (bool)
     {
+        bool truVal;
         for (uint256 i = 0; i < validTokens.length; i++) {
             if (daoContract.balanceOf(_proposalist, validTokens[i]) >= 1) {
-                return true;
+                truVal = true;
             }
-            return false;
+            //return false;
         }
+        return truVal;
     }
 
     function checkVoteEligibility(uint256 _id, address _voter)
@@ -71,12 +73,14 @@ contract Dao {
         view
         returns (bool)
     {
+        bool truVal;
         for (uint256 i = 0; i < Proposals[_id].canVote.length; i++) {
             if (Proposals[_id].canVote[i] == _voter) {
-                return true;
+                truVal = true;
             }
-            return false;
+            // return false;
         }
+        return truVal;
     }
 
     function createProposal(
