@@ -1,5 +1,5 @@
 import React from "react";
-import "./Rentals.css";
+import "./Hodls.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import logo from "../images/web3logo.png";
@@ -9,12 +9,11 @@ import { useState, useEffect } from "react";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import User from "../components/User";
 
-const Rentals = () => {
+const Hodls = () => {
     const { state: searchFilters } = useLocation();
     const [highLight, setHighLight] = useState();
     const { Moralis, account } = useMoralis();
-    const [rentalsList, setRentalsList] = useState();
-    const [coOrdinates, setCoOrdinates] = useState([]);
+    const [hodlsList, setHodlsList] = useState();
     const contractProcessor = useWeb3ExecuteFunction();
     const dispatch = useNotification();
 
@@ -59,9 +58,7 @@ const Rentals = () => {
             result.forEach((e) => {
                 cords.push({ lat: e.attributes.lat, lng: e.attributes.long });
             });
-
-            setCoOrdinates(cords);
-            setRentalsList(result);
+            setHodlsList(result);
         }
 
         fetchRentalsList();
@@ -132,27 +129,27 @@ const Rentals = () => {
                     </Link>
                 </div>
                 <div className="searchReminder">
-                    <div className="filter">{searchFilters.destination}</div>
+                    <div className="filter">{searchFilters.crypto}</div>
                     <div className="vl" />
                     <div className="filter">
                         {`
-           ${searchFilters.checkIn.toLocaleString("default", {
+           ${searchFilters.hodlIn.toLocaleString("default", {
                             month: "short",
                         })} 
-           ${searchFilters.checkIn.toLocaleString("default", {
+           ${searchFilters.hodlIn.toLocaleString("default", {
                             day: "2-digit",
                         })} 
            - 
-           ${searchFilters.checkOut.toLocaleString("default", {
+           ${searchFilters.hodlOut.toLocaleString("default", {
                             month: "short",
                         })} 
-           ${searchFilters.checkOut.toLocaleString("default", {
+           ${searchFilters.hodlOut.toLocaleString("default", {
                             day: "2-digit",
                         })}
           `}
                     </div>
                     <div className="vl" />
-                    <div className="filter">{searchFilters.guests} Guest</div>
+                    <div className="filter">{searchFilters.amount} Eherium</div>
                     <div className="searchFiltersIcon">
                         <Icon fill="#ffffff" size={20} svg="search" />
                     </div>
@@ -168,9 +165,9 @@ const Rentals = () => {
             <hr className="line" />
             <div className="rentalsContent">
                 <div className="rentalsContentL">
-                    Stays Available For Your Destination
-                    {rentalsList &&
-                        rentalsList.map((e, i) => {
+                    Hodl Etherium with the following parameters
+                    {hodlsList &&
+                        hodlsList.map((e, i) => {
                             return (
                                 <>
                                     <hr className="line2" />
@@ -219,4 +216,4 @@ const Rentals = () => {
     );
 };
 
-export default Rentals;
+export default Hodls;

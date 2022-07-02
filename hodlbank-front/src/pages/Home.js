@@ -8,10 +8,10 @@ import { useState } from "react";
 
 
 const Home = () => {
-    const [checkIn, setCheckIn] = useState(new Date());
-    const [checkOut, setCheckOut] = useState(new Date());
-    const [destination, setDestination] = useState("New York");
-    const [guests, setGuests] = useState(2);
+    const [hodlIn, setHodlIn] = useState(new Date());
+    const [hodlOut, setHodlOut] = useState(new Date());
+    const [crypto, setCrypto] = useState("Etherium");
+    const [amount, setAmount] = useState(2);
 
     return (
         <>
@@ -28,67 +28,56 @@ const Home = () => {
                     <div>Online Experiences</div>
                 </div>
                 <div className="lrContainers">
-                    {/* <ConnectButton /> */}
+                    <ConnectButton />
                 </div>
             </div>
             <div className="tabContent">
                 <div className="searchFields">
                     <div className="inputs">
-                        Location
+                        Crypto
                         <Select
                             defaultOptionIndex={0}
-                            onChange={(data) => setDestination(data.label)}
+                            onChange={(data) => setCrypto(data.label)}
                             options={[
                                 {
-                                    id: "ny",
-                                    label: "New York",
+                                    id: "eth",
+                                    label: "Etherium",
                                 },
-                                {
-                                    id: "lon",
-                                    label: "London",
-                                },
-                                {
-                                    id: "db",
-                                    label: "Dubai",
-                                },
-                                {
-                                    id: "la",
-                                    label: "Los Angeles",
-                                },
+
                             ]}
                         />
                     </div>
                     <div className="vl" />
                     <div className="inputs">
-                        Check In
+                        HODL In
                         <DatePicker
                             id="CheckIn"
-                            onChange={(event) => setCheckIn(event.date)}
+                            onChange={(event) => setHodlIn(event.date)}
                         />
                     </div>
                     <div className="vl" />
                     <div className="inputs">
-                        Check Out
+                        HODL Out
                         <DatePicker
                             id="CheckOut"
-                            onChange={(event) => setCheckOut(event.date)}
+                            onChange={(event) => setHodlOut(event.date)}
                         />
                     </div>
                     <div className="vl" />
                     <div className="inputs">
-                        Guests
+                        HODL Amount
                         <Input
                             value={2}
                             name="AddGuests"
                             type="number"
-                            onChange={(event) => setGuests(Number(event.target.value))}
+                            onChange={(event) => setAmount(Number(event.target.value))}
                         />
                     </div>
-                    <Link to={"/rentals"} state={{
-                        destination: destination,
-                        checkIn: checkIn,
-                        checkOut: checkOut,
-                        guests: guests
+                    <Link to={"/hodls"} state={{
+                        crypto: crypto,
+                        hodlIn: hodlIn,
+                        hodlOut: hodlOut,
+                        amount: amount
                     }}>
                         <div className="searchButton">
                             <Icon fill="#ffffff" size={24} svg="search" />
@@ -104,8 +93,8 @@ const Home = () => {
                 </div>
                 <Button
                     text="Explore A Location"
-                    // onClick={() => console.log(checkOut)}
-                    onClick={() => alert(checkOut)}
+                    // onClick={() => console.log(hodlOut)}
+                    onClick={() => alert(hodlOut)}
                 />
             </div>
         </>
