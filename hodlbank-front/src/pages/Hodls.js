@@ -3,7 +3,8 @@ import "./Hodls.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import logo from "../images/web3logo.png";
-import { ConnectButton, Icon, Button, useNotification } from "web3uikit";
+import hodlImg from "../images/hodlit.png";
+import { ConnectButton, Icon, Button, useNotification, Illustration } from "web3uikit";
 
 import { useState, useEffect } from "react";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
@@ -13,7 +14,33 @@ const Hodls = () => {
     const { state: searchFilters } = useLocation();
     const [highLight, setHighLight] = useState();
     const { Moralis, account } = useMoralis();
-    const [hodlsList, setHodlsList] = useState();
+    const [hodlsList, setHodlsList] = useState([
+        {
+            attributes: {
+                city: "New York",
+                unoDescription: "3 Guests . 2 Beds . 2 Rooms",
+                dosDescription: "Wifi . Kitchen . Living Area",
+                imgUrl: "https://ipfs.moalis.io:2053/ipfs/QmS3gdXVcjM72JSGH82ZEvu4D7nS6sYhbi5YyCw8u8z4pE/media/3",
+                lat: "40.716862",
+                long: "-72.999005",
+                name: "Apartmenet in China Town",
+                pricePerDay: "3"
+            }
+        },
+        {
+
+            attributes: {
+                city: "Paris",
+                unoDescription: "1 Guests . 1 Bed . 2 Rooms",
+                dosDescription: "Wifi . Kitchen . Living Area",
+                imgUrl: "https://ipfs.moalis.io:2053/ipfs/QmS3gdXVcjM72JSGH82ZEvu4D7nS6sYhbi5YyCw8u8z4pE/media/3",
+                lat: "40.716862",
+                long: "-72.999005",
+                name: "Apartmenet in Passy",
+                pricePerDay: "3"
+            }
+        }
+    ]);
     const contractProcessor = useWeb3ExecuteFunction();
     const dispatch = useNotification();
 
@@ -129,7 +156,7 @@ const Hodls = () => {
                     </Link>
                 </div>
                 <div className="searchReminder">
-                    <div className="filter">{searchFilters.crypto}</div>
+                    <div className="filter">Etherium</div>
                     <div className="vl" />
                     <div className="filter">
                         {`
@@ -149,7 +176,7 @@ const Hodls = () => {
           `}
                     </div>
                     <div className="vl" />
-                    <div className="filter">{searchFilters.amount} Eherium</div>
+                    <div className="filter">{searchFilters.amount} ETH</div>
                     <div className="searchFiltersIcon">
                         <Icon fill="#ffffff" size={20} svg="search" />
                     </div>
@@ -163,16 +190,18 @@ const Hodls = () => {
             </div>
 
             <hr className="line" />
-            <div className="rentalsContent">
-                <div className="rentalsContentL">
-                    Hodl Etherium with the following parameters
+            <div className="hodlsContent">
+                <div className="hodlsContentL">
+                    Curent Eth HODLs ...
                     {hodlsList &&
                         hodlsList.map((e, i) => {
+
                             return (
                                 <>
                                     <hr className="line2" />
                                     <div className={highLight == i ? "rentalDivH " : "rentalDiv"}>
-                                        <img className="rentalImg" src={e.attributes.imgUrl}></img>
+                                        <img className="rentalImg" src={hodlImg}></img>
+
                                         <div className="rentalInfo">
                                             <div className="rentalTitle">{e.attributes.name}</div>
                                             <div className="rentalDesc">
@@ -206,10 +235,12 @@ const Hodls = () => {
                                     </div>
                                 </>
                             );
-                        })}
+                        })
+                    }
+
                 </div>
-                <div className="rentalsContentR">
-                    <div>HODL Details</div>
+                <div className="hodlsContentR">
+                    <Illustration logo="token" />
                 </div>
             </div>
         </>

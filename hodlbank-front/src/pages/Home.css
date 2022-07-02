@@ -51,6 +51,10 @@
     padding-left: 30px;
 }
 
+.date-container>div {
+    outline: none;
+}
+
 .tabs {
     color: white;
     font-weight: 500;
